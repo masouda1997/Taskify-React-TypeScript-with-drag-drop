@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
+import { useState } from "react";
 import { Todo } from "../Model";
 import { MdDeleteForever, MdEditSquare, MdCheckBox } from "react-icons/md";
 
@@ -9,18 +10,67 @@ type Props = {
 };
 
 const SingleTodo = ({ todo, todos, setTodos }: Props) => {
+	const [edit, setEdit] = useState<boolean>(false);
+	const [editTodo, setEditTodo] = useState<string>(todo.todo);
+	const inputRef = useRef<HTMLInputElement>(null);
+
+	useEffect(() => {
+		inputRef.current?.focus();
+	}, [edit]);
+
+	const handleDone = (id: unknown) => {
+		setTodos(
+			todos.map((t) => (t.id === id ? { ...t, isDone: !t.isDone } : t))
+		);
+		console.log(todos);
+		console.log(id);
+	};
+
+	const handleDelete = (id: number) => {
+		setTodos(todos.filter((t) => t.id !== id));
+	};
+
+	const handleChange = () => {
+		if (!edit && !todo.isDone) {
+			setEdit(!edit);
+		}
+	};
+
+	const handleEdit = (e: React.FormEvent, id: number) => {
+		e.preventDefault();
+
+		setTodos(
+			todos.map((t) => (t.id === id ? { ...todo, todo: editTodo } : t))
+		);
+		setEdit(false);
+	};
 	return (
-		<form className="flex md:w-full xl:w-[40%] 2xl:w-[30%] lg:w-[30%] p-4 mt-3 rounded-[10px] bg-[url('https://img.freepik.com/free-photo/crumpled-yellow-paper-background-close-up_60487-2390.jpg?size=626&ext=jpg')] ">
-			<span className="flex-grow">{todo.todo}</span>
-			<div className="flex items-center flex-grow-0">
+		<form
+			className="flex justify-between md:w-full xl:w-[40%] 2xl:w-[30%] lg:w-[30%] p-4 mt-3 rounded-[10px] bg-[url('https://img.freepik.com/free-photo/crumpled-yellow-paper-background-close-up_60487-2390.jpg?size=626&ext=jpg')] "
+			onSubmit={(e) => handleEdit(e, todo.id)}
+		>
+			{edit ? (
+				<input
+					ref={inputRef}
+					className="flex p-1 border-none text-[20px] focus:outline-none"
+					value={editTodo}
+					onChange={(e) => setEditTodo(e.target.value)}
+				/>
+			) : todo.isDone ? (
+				<s className="flex-grow">{todo.todo}</s>
+			) : (
+				<span className="flex-grow">{todo.todo}</span>
+			)}
+
+			<div className="flex items-center flex-grow-0 gap-1">
 				<span>
-					<MdDeleteForever />
+					<MdDeleteForever onClick={() => handleDelete(todo.id)} />
 				</span>
 				<span>
-					<MdEditSquare />
+					<MdEditSquare onClick={() => handleChange()} />
 				</span>
 				<span>
-					<MdCheckBox />
+					<MdCheckBox onClick={() => handleDone(todo.id)} />
 				</span>
 			</div>
 		</form>
