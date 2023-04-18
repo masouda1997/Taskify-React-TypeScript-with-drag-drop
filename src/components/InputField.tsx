@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 
 interface IProps {
 	todo: string;
@@ -7,14 +7,20 @@ interface IProps {
 }
 
 const InputField: React.FC<IProps> = ({ todo, setTodo, addHandler }) => {
+	const inputRef = useRef<HTMLInputElement>(null);
+
 	return (
 		<form
 			className="flex w-[90%] relative items-center"
-			onSubmit={addHandler}
+			onSubmit={(e) => {
+				addHandler(e);
+				inputRef.current?.blur();
+			}}
 		>
 			<input
 				type="text"
 				value={todo}
+				ref={inputRef}
 				onChange={(e) => setTodo(e.target.value)}
 				placeholder="enter task"
 				className="capitalize w-full rounded-[50px] py-[20px] px-[30px] text-2xl duration-[2s] shadow-[inset_0_0_5px_rgba(0,0,0)] focus:shadow-[0_0_10px_1000px_rgba(0,0,0,.5)] focus:outline-none"
