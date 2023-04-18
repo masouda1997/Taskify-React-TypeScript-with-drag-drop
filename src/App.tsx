@@ -1,26 +1,15 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import InputField from "./components/InputField";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App: React.FC = () => {
+	return (
+		<div className="w-full h-[100vh] flex flex-col items-center bg-[#2f74c0] font-Neu">
+			<header className="uppercase text-white text-[40px] my-[30px] z-10 ">
+				Taskify
+			</header>
+		</div>
+	);
+};
 
 export default App;
