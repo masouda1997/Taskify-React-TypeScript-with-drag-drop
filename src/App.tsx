@@ -8,6 +8,7 @@ const App: React.FC = () => {
 			<header className="uppercase text-white text-[40px] my-[30px] z-10 ">
 				Taskify
 			</header>
+			<InputField />
 		</div>
 	);
 };
