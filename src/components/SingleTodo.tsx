@@ -47,9 +47,11 @@ const SingleTodo = ({ index, todo, todos, setTodos }: Props) => {
 	};
 	return (
 		<Draggable draggableId={todo.id.toString()} index={index}>
-			{(provided) => (
+			{(provided, snapshot) => (
 				<form
-					className="flex w-full p-4 mt-3 rounded-[10px] bg-[url('https://img.freepik.com/free-photo/crumpled-yellow-paper-background-close-up_60487-2390.jpg?size=626&ext=jpg')] hover:shadow-[0_0_5px_black] duration-300 text-black "
+					className={`flex w-full p-4 mt-3 rounded-[10px] bg-[url('https://img.freepik.com/free-photo/crumpled-yellow-paper-background-close-up_60487-2390.jpg?size=626&ext=jpg')] hover:shadow-[0_0_5px_black] duration-300 text-black ${
+						snapshot.isDragging ? "drag" : ""
+					}`}
 					onSubmit={(e) => handleEdit(e, todo.id)}
 					{...provided.draggableProps}
 					{...provided.dragHandleProps}

@@ -50,7 +50,7 @@ const TodoList = ({
 						ref={provided.innerRef}
 						{...provided.droppableProps}
 						className={`bg-orange-600 rounded-[10px] flex-1 p-6 text-[25px] text-white ${
-							snapshot.isDraggingOver ? "dragactive" : ""
+							snapshot.isDraggingOver ? "dragacomplete" : ""
 						}`}
 					>
 						<span>Completed Tasks</span>

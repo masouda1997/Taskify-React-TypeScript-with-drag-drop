@@ -3,3 +3,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+   .dragactive{
+      background-color: #00ddec;
+      border: 1px solid black;
+   }
+   .dragacomplete{
+      background-color: #ff5f0c;
+      border: 1px solid black;
+   }
+   .drag{
+      box-shadow: 0 0 20px black;
+   }
+}
