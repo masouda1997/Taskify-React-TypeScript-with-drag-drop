@@ -10,14 +10,29 @@ interface IProps {
 const TodoList = ({ todos, setTodos }: IProps) => {
 	console.log(todos);
 	return (
-		<ul className="flex flex-wrap ">
+		<ul className="w-[95%] gap-1 mt-3 flex md:flex-col ">
 			{todos.map((task) => (
-				<SingleTodo
-					key={task.id}
-					todo={task}
-					todos={todos}
-					setTodos={setTodos}
-				/>
+				<>
+					<section className="bg-[#32c3cd] rounded-[10px] flex-1 p-6 text-[25px] text-white">
+						<span>Active Tasks</span>
+						<SingleTodo
+							key={task.id}
+							todo={task}
+							todos={todos}
+							setTodos={setTodos}
+						/>
+					</section>
+
+					<section className="bg-orange-600 rounded-[10px] flex-1 p-6 text-[25px] text-white">
+						<span>Completed Tasks</span>
+						<SingleTodo
+							key={task.id}
+							todo={task}
+							todos={todos}
+							setTodos={setTodos}
+						/>
+					</section>
+				</>
 			))}
 		</ul>
 	);
