@@ -26,7 +26,17 @@ const App: React.FC = () => {
 				Taskify
 			</header>
 			<InputField todo={todo} setTodo={setTodo} addHandler={handleAdd} />
-			<TodoList todos={todos} setTodos={setTodos} />
+			<div className="flex justify-between md:flex-col w-[95%] gap-1 mt-3">
+				<section className="bg-[#32c3cd] rounded-[10px] flex-1 p-6 text-[25px] text-white">
+					<span>Active Tasks</span>
+					<TodoList todos={todos} setTodos={setTodos} />
+				</section>
+
+				<section className="bg-orange-600 rounded-[10px] flex-1 p-6 text-[25px] text-white">
+					<span>Completed Tasks</span>
+					<TodoList todos={todos} setTodos={setTodos} />
+				</section>
+			</div>
 		</div>
 	);
 };

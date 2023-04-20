@@ -13,7 +13,6 @@ const SingleTodo = ({ todo, todos, setTodos }: Props) => {
 	const [edit, setEdit] = useState<boolean>(false);
 	const [editTodo, setEditTodo] = useState<string>(todo.todo);
 	const inputRef = useRef<HTMLInputElement>(null);
-
 	useEffect(() => {
 		inputRef.current?.focus();
 	}, [edit]);
@@ -46,7 +45,7 @@ const SingleTodo = ({ todo, todos, setTodos }: Props) => {
 	};
 	return (
 		<form
-			className="flex justify-between md:w-full xl:w-[40%] 2xl:w-[30%] lg:w-[30%] p-4 mt-3 rounded-[10px] bg-[url('https://img.freepik.com/free-photo/crumpled-yellow-paper-background-close-up_60487-2390.jpg?size=626&ext=jpg')] "
+			className="flex w-full p-4 mt-3 rounded-[10px] bg-[url('https://img.freepik.com/free-photo/crumpled-yellow-paper-background-close-up_60487-2390.jpg?size=626&ext=jpg')] hover:scale-105 hover:shadow-[0_0_5px_black] duration-300 text-black "
 			onSubmit={(e) => handleEdit(e, todo.id)}
 		>
 			{edit ? (

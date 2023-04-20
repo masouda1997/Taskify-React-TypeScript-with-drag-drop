@@ -10,7 +10,7 @@ interface IProps {
 const TodoList = ({ todos, setTodos }: IProps) => {
 	console.log(todos);
 	return (
-		<ul className="flex justify-evenly w-[90%] flex-wrap ">
+		<ul className="flex flex-wrap ">
 			{todos.map((task) => (
 				<SingleTodo
 					key={task.id}
