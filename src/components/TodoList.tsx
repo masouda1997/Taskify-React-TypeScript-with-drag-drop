@@ -18,12 +18,14 @@ const TodoList = ({
 }: IProps) => {
 	return (
 		<div className="w-[95%] gap-1 mt-3 flex md:flex-col ">
-			<Droppable droppableId="TodoList">
-				{(provided) => (
+			<Droppable droppableId="theID">
+				{(provided, snapshot) => (
 					<section
 						ref={provided.innerRef}
 						{...provided.droppableProps}
-						className="bg-[#32c3cd] rounded-[10px] flex-1 p-6 text-[25px] text-white"
+						className={`bg-[#32c3cd] rounded-[10px] flex-1 p-6 text-[25px] text-white ${
+							snapshot.isDraggingOver ? "dragactive" : ""
+						}`}
 					>
 						<span>Active Tasks</span>
 						{todos.map((task, index) => (
@@ -35,16 +37,21 @@ const TodoList = ({
 								setTodos={setTodos}
 							/>
 						))}
+						{/* to fix the floating shape when we drag sth */}
+						{/* it produce an empty place holder */}
+						{provided.placeholder}
 					</section>
 				)}
 			</Droppable>
 
 			<Droppable droppableId="TodosRemove">
-				{(provided) => (
+				{(provided, snapshot) => (
 					<section
 						ref={provided.innerRef}
 						{...provided.droppableProps}
-						className="bg-orange-600 rounded-[10px] flex-1 p-6 text-[25px] text-white"
+						className={`bg-orange-600 rounded-[10px] flex-1 p-6 text-[25px] text-white ${
+							snapshot.isDraggingOver ? "dragactive" : ""
+						}`}
 					>
 						<span>Completed Tasks</span>
 						{completedTodos.map((task, index) => (
@@ -56,6 +63,7 @@ const TodoList = ({
 								setTodos={setCompletedTodos}
 							/>
 						))}
+						{provided.placeholder}
 					</section>
 				)}
 			</Droppable>
